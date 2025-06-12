@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Notes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="task.css" />
+</head>
+<body>
+  <header>
+    <h1>Note-Taking APP</h1>
+    <div class="header-controls">
+      <select id="categoryFilter" onchange="filterNotes()">
+        <option value="all">All Categories</option>
+        <option value="personal">Personal</option>
+        <option value="work">Work</option>
+      </select>
+      <input type="search" id="searchInput" placeholder="Search notes..." oninput="searchNotes()" />
+      <label class="theme-toggle">
+        <input type="checkbox" id="themeToggle" onchange="toggleTheme()" />
+        <span><i class="fas fa-sun"></i><i class="fas fa-moon"></i></span>
+      </label>
+    </div>
+  </header>
+
+  <main class="dashboard">
+    <div class="card" data-type="text">
+      <i class="fas fa-file-alt"></i>
+      <h3>Text Note</h3>
+    </div>
+    <div class="card" data-type="list">
+      <i class="fas fa-list-ul"></i>
+      <h3>List Note</h3>
+    </div>
+    <div class="card" data-type="draw">
+      <i class="fas fa-paint-brush"></i>
+      <h3>Draw Note</h3>
+    </div>
+    <div class="card" data-type="audio">
+      <i class="fas fa-microphone"></i>
+      <h3>Audio Note</h3>
+    </div>
+    <div class="card" data-type="image">
+      <i class="fas fa-image"></i>
+      <h3>Image Note</h3>
+    </div>
+    <div class="card" data-type="saved">
+      <i class="fas fa-folder-open"></i>
+      <h3>Saved Notes</h3>
+    </div>
+  </main>
+
+  <div class="modal" id="noteModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <div id="textPanel" class="note-panel">
+        <input type="text" id="textTitle" placeholder="Title" />
+        <select id="textCategory">
+          <option value="personal">Personal</option>
+          <option value="work">Work</option>
+        </select>
+        <textarea id="textContent" placeholder="Write your note..."></textarea>
+        <button class="btn" onclick="saveNote('text')">Save</button>
+        <button class="btn btn-danger" onclick="deleteNote('text')">Delete</button>
+      </div>
+      <div id="listPanel" class="note-panel">
+        <input type="text" id="listTitle" placeholder="List Title" />
+        <select id="listCategory">
+          <option value="personal">Personal</option>
+          <option value="work">Work</option>
+        </select>
+        <div id="listItems">
+          <div class="list-item">
+            <input type="checkbox" />
+            <input type="text" placeholder="List item..." />
+          </div>
+        </div>
+        <button class="add-item" onclick="addListItem()">+ Add Item</button>
+        <button class="btn" onclick="saveNote('list')">Save</button>
+        <button class="btn btn-danger" onclick="deleteNote('list')">Delete</button>
+      </div>
+      <div id="drawPanel" class="note-panel">
+        <input type="text" id="drawTitle" placeholder="Drawing Title" />
+        <select id="drawCategory">
+          <option value="personal">Personal</option>
+          <option value="work">Work</option>
+        </select>
+        <div class="draw-controls">
+          <input type="color" id="colorPicker" value="#6200ea" />
+          <input type="range" id="brushSize" min="1" max="20" value="5" />
+          <button class="btn btn-tool" onclick="setEraser()">Eraser</button>
+          <button class="btn btn-tool" onclick="setBrush()">Brush</button>
+        </div>
+        <canvas id="drawingCanvas" width="500" height="300"></canvas>
+        <button class="btn" onclick="saveNote('draw')">Save</button>
+        <button class="btn btn-danger" onclick="clearCanvas()">Clear</button>
+      </div>
+      <div id="audioPanel" class="note-panel">
+        <input type="text" id="audioTitle" placeholder="Audio Title" />
+        <select id="audioCategory">
+          <option value="personal">Personal</option>
+          <option value="work">Work</option>
+        </select>
+        <button class="btn" onclick="startRecording()">Record</button>
+        <button class="btn btn-danger" onclick="stopRecording()">Stop</button>
+        <audio id="audioPlayback" controls style="display: none;"></audio>
+        <button class="btn" onclick="saveNote('audio')">Save</button>
+        <button class="btn btn-danger" onclick="deleteNote('audio')">Delete</button>
+      </div>
+      <div id="imagePanel" class="note-panel">
+        <input type="text" id="imageTitle" placeholder="Image Title" />
+        <select id="imageCategory">
+          <option value="personal">Personal</option>
+          <option value="work">Work</option>
+        </select>
+        <input type="file" id="imageInput" accept="image/*" />
+        <div id="imagePreview"></div>
+        <button class="btn" onclick="saveNote('image')">Save</button>
+        <button class="btn btn-danger" onclick="deleteNote('image')">Delete</button>
+      </div>
+      <div id="savedPanel" class="note-panel">
+        <h2>Saved Notes</h2>
+        <div id="savedNotesList"></div>
+        <button class="btn btn-danger" onclick="clearAllNotes()">Clear All</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="task.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Listing Page</title>
+  <link rel="stylesheet" href="product.css" />
+</head>
+<body>
+  <header>
+    <h1 class="first">MiniMart Store🛍️</h1>
+    <div id="cartIcon">🛒Cart (<span id="cartCount">0</span>)</div>
+  </header>
+
+  <div class="controls">
+    <select id="categoryFilter">
+      <option value="all">All Categories</option>
+      <option value="electronics">Electronics</option>
+      <option value="clothing">Clothing</option>
+      <option value="books">Books</option>
+      <option value = "kids">Kids</option>
+    </select>
+
+    <select id="priceFilter">
+      <option value="all">All Prices</option>
+      <option value="0-1000">Below ₹1000</option>
+      <option value="1000-5000">₹1000 - ₹5000</option>
+      <option value="5000-10000">₹5000 - ₹10000</option>
+    </select>
+
+    <select id="sortBy">
+      <option value="default">Sort By</option>
+      <option value="priceLowHigh">Price: Low to High</option>
+      <option value="priceHighLow">Price: High to Low</option>
+      <option value="ratingHighLow">Rating: High to Low</option>
+    </select>
+  </div>
+
+  <div id="productList"></div>
+  <div class="modal" id="productModal">
+    <div class="modal-content" id="modalContent">
+      <span class="closeBtn" onclick="closeModal()">×</span>
+    </div>
+  </div>
+  <div id="toast">Added to cart!</div>
+
+
+  <script src="product.js"></script>
+</body>
+</html>
